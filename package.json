@@ -1,6 +1,6 @@
 {
-  "name": "Scrim-s041bir",
-  "description": "https://scrimba.com/frontend-path-c0j/~0121/s0krvu3ov8/head",
+  "name": "Scrim-s04sl5c",
+  "description": "https://scrimba.com/frontend-path-c0j/~0124/s0qkc39n7c/head",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -11,6 +11,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.3",
+    "miragejs": "0.1.46",
     "vite": "latest"
   },
   "devDependencies": {
