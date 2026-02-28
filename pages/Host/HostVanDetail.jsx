@@ -1,21 +1,42 @@
 import React from "react"
-import {useParams} from "react-router-dom"
-export default function HostVanDetail() {
-    const [van,setVan]=React.useState(null)
-    const {id}=useParams()
+import { useParams, Link,Outlet } from "react-router-dom"
 
-    React.useEffect(()=>{
+export default function HostVanDetail() {
+    const { id } = useParams()
+    const [currentVan, setCurrentVan] = React.useState(null)
+
+    React.useEffect(() => {
         fetch(`/api/host/vans/${id}`)
-    .then(r=>r.json())
-    .then(data=>setVan(data.vans))},[])
-    return(
-      van?<div key={van[0].id}>
-            <img src={`${van[0].imageUrl}`}/>
-            <h1>{van[0].name}</h1>
-            <p>{van[0].price}</p>
-            <p>{van[0].type}</p>
+            .then(res => res.json())
+            .then(data => setCurrentVan(data.vans))
+    }, [])
+
+    if (!currentVan) {
+        return <h1>Loading...</h1>
+    }
+    return (
+        <section>
+            <Link
+                to=".."
+                relative="path"
+                className="back-button"
+            >&larr; <span>Back to all vans</span></Link>
+
+            <div className="host-van-detail-layout-container">
+                <div className="host-van-detail">
+                    <img src={currentVan.imageUrl} />
+                    <div className="host-van-detail-info-text">
+                        <i
+                            className={`van-type van-type-${currentVan.type}`}
+                        >
+                            {currentVan.type}
+                        </i>
+                        <h3>{currentVan.name}</h3>
+                        <h4>${currentVan.price}/day</h4>
+                    </div>
+                </div>
+                {<Outlet/>}
             </div>
-            :null
+        </section>
     )
-    
- }
+}
